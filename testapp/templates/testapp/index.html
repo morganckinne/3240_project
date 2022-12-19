@@ -1,0 +1,64 @@
+{% include "testapp/header.html" %}
+
+<div class="container-fluid d-flex align-items-center justify-content-center">
+<!-- <div class="card-deck"> -->
+        {% if post_list %}
+            <div class="card-group">
+                <ul style="list-style: none;">
+                    {% for post in post_list %}
+                        <li>
+                            <div class="card text-white bg-dark mb-3" style="max-width: 40rem;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{post.post_title}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{post.associated_dept}} {{post.course_id}}</h6>
+                                    {% if post.post_creator %}
+                                        <h6 class="card-subtitle mb-2 text-muted">{{post.post_creator.username}}</h6>
+                                    {% endif %}
+                                    <p class="card-text">{{post.post_text}}</p>
+                                    <!-- <p class="card-text"><small class="text-muted">Last updated {{post.pub_date}}</small></p> -->
+                                    <!-- <a href="#" class="card-link">Card link</a> -->
+                                    <!-- <a href="#" class="card-link">Another link</a> -->
+                                    <!-- <div class="col"> -->
+                                    <!-- <h4>{{post.post_title}} {{post.associated_dept}}</h4> -->
+                                    <!-- <p class="lead"> {{post.post_text}}</p> -->
+                                    <!-- <p>{{post.pub_date}}</p> -->
+                                    <!-- <div class="form-check" style="width:auto;">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Interested?</label>
+        </div> -->
+                                    <!-- <hr> -->
+                                    
+                                </div>
+                                <div class="card-footer">
+                                    <div class="col text-center">
+                                        {% if user in post.favorite.all %}
+                                        <form method='POST' action="{% url 'testapp:remove_favorite' post.id %}">
+                                            {% csrf_token %}
+                                            <input type='hidden' name='post' value={{ post.id }}>
+                                            <button type='submit' class = "btn btn-danger btn-sm button-center">Unfavorite</button>
+                                        </form>
+                                        {% else %}
+                                        <form method='POST' action="{% url 'testapp:favorite_post' post.id %}">
+                                            {% csrf_token %}
+                                            <input type='hidden' name='post' value={{ post.id }}>
+                                            <button type='submit' class = "btn btn-primary btn-sm button-center">Favorite</button>
+                                        </form>
+                                        {% endif %}
+                                        
+                                    {% if post.favorite.count == 1%}
+                                    <p class="card-text">{{post.favorite.count}} favorite</p>
+                                    {% else %}
+                                    <p class="card-text">{{post.favorite.count}} favorites</p>
+                                    {% endif %}
+                                    </div>
+                                    <small class="text-muted">Last updated {{post.pub_date}}</small>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>No posts are available.</p>
+        {% endif %}
+</div>

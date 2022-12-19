@@ -1,0 +1,45 @@
+{% include "testapp/header.html" %}
+
+<button type="button" class="btn btn-rounded btn-lg py-0">
+    <a class="nav-link" href="{% url 'testapp:threads' %}">Back to Threads</a>
+</button>
+<h5 class="text-center">You are messaging with: {{ thread_username }}</h5>
+{% if message_list %}
+    {% for message in message_list %}
+    <div class="card">
+        <div class="card-body">
+            {% if message.sender == user %}
+                <h5 class="card-title">You</h5>
+            {% else %}
+                <h5 class="card-title">{{ message.sender }}</h5>
+            {% endif %}
+            <p>{{ message.message_text }}</p>
+            <small class="text-muted">Sent {{ message.sent_date }}</small>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <div class="card-body text-center">
+            <p>No messages are available.</p>
+        </div>
+    </div>
+{% endif %}
+<div class="card">
+    <div class="card-body text-center">
+        <form method="POST" action="{% url 'testapp:create_message' thread_pk %}">
+            {% csrf_token %}
+            {% if error_message %}<p class="alert alert-danger"><strong>{{ error_message }}</strong></p>{% endif %}
+            <fieldset>
+                <div class="mx-auto col-lg-6">
+                    <label>Message:</label>
+                    <textarea name="message" id="1" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+            </fieldset>
+            <div class="text-center">
+                <input type="submit" value="Send" class="my-4 btn btn-primary text-center">
+            </div>
+        </form>
+    </div>
+</div>
+<br/>

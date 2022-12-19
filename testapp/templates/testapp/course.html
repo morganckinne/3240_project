@@ -1,0 +1,45 @@
+{% include "testapp/header.html" %}
+
+<div class="container-fluid d-flex align-items-center justify-content-center">
+    {% if classdata %}
+        <div class="jumbotron text-center">
+            <h1 style="color:blue;">You are looking at classes in: <strong>{{ classdata.0.subject }}</strong></h1>
+        </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+
+            <body>
+                {% block content %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Catalog Number</th>
+                            <th>Course Section</th>
+                            <th>Description</th>
+                            <th>Instructor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for class in classdata %}
+                        <tr>
+                            <td>{{ class.subject }}</td>
+                            <td>{{ class.catalog_number }}</td>
+                            <td>{{ class.course_section }}</td>
+                            <td>{{ class.description }}</td>
+                            <td>{{ class.instructor.name }}</td>
+                            <td><button class="btn btn-primary">
+                                <a href="{% url 'testapp:createPostFromClass' class.subject class.catalog_number %}" class="text-decoration-none text-white">Make a Post!</a>
+                            </button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endblock %}
+            </body>
+        </div>
+    {% else %}
+        <p>That department pneumonic does not exist.</p>
+    {% endif %}
+</div>

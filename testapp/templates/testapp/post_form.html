@@ -1,0 +1,97 @@
+{% include "testapp/header.html" %}
+
+<!--https://stackoverflow.com/questions/69250686/how-to-centre-a-div-in-bootstrap-5-->
+
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-5">Create a listing here:</h1>
+      <p>Posts should include a title, description (this is where you can put the professor teaching your section, as well as what section it is, and more information about your experience in the class.</p>
+    </div>
+</div>
+</div>
+
+<div class="card">
+    <div class="card-body text-center">
+        <form action="{% url 'testapp:createPost' %}" method="POST" class="mx-5">
+            {% csrf_token %}
+            {% if error_message %}<p class="alert alert-danger"><strong>{{ error_message }}</strong></p>{% endif %}
+            <fieldset>
+                <div class="mx-auto my-3" style="width:50%;">
+                    <label>Title:<span class="require text-danger"> *</span></label>
+                    <input type="text" name="post_title" id="1" value="" class="form-control">
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="mx-auto my-3" style="width:50%;">
+                    <label>Description:<span class="require text-danger"> *</span></label>
+                    <textarea name="post_text" id="2" cols="30" rows="5" class="form-control"></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="mx-auto my-3" style="width:50%;">
+                    <label>Book ISBN (ex. 9783161484100):</label>
+                    <input type="text" name="book_ISBN" id="3" value="" class="form-control">
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="mx-auto my-3" style="width:50%;">
+                    <label>Course Department (ex. CS):<span class="require text-danger"> *</span></label>
+                    {% if associated_dept %}
+                        <input type="text" name="associated_dept" id="4" value="{{ associated_dept }}" class="form-control">
+                    {% else %}
+                        <input type="text" name="associated_dept" id="4" value="" class="form-control">
+                    {% endif %}
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="mx-auto my-3" style="width:50%;">
+                    <label>Course ID:<span class="require text-danger"> *</span></label>
+                    {% if course_id %}
+                        <input type="text" name="course_id" id="5" value="{{ course_id }}" class="form-control">
+                    {% else %}
+                        <input type="text" name="course_id" id="5" value="" class="form-control">
+                    {% endif %}
+                </div>
+            </fieldset>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+<!-- <div class="container d-flex align-items-center justify-content-center rounded bg-light">
+    <html>
+    <body>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }} -->
+
+            <!-- <div class="form-group" style="width:auto;">
+                <label for="post_title">Title <span class="require">*</span></label>
+                <input type="text" class="form-control" name="post_title" />
+            </div>
+
+            <div class="form-group" style="width:auto;">
+                <label for="post_text">Description</label>
+                <textarea rows="5" class="form-control" name="post_text" ></textarea>
+            </div>
+
+            <div class="form-check" style="width:auto;">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">Sell Status</label>
+            </div>
+
+            <select class="form-select form-select-border-width" aria-label="Default select example" style="width:auto;"> -->
+            <!-- <select class="form-select" aria-label="Default select example" style="width:auto;">
+                {% for item in form.associated_dept %}
+                    <option value="1">{{ item }}</option>
+                {% endfor %}
+            </select> -->
+
+            <!-- <input type="submit" value="Submit">
+            
+            
+
+        </form>
+    </body>
+</html>
+</div> -->

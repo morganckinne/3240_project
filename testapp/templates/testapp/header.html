@@ -1,0 +1,62 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static %}
+
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-4">Textbook Listing</h1>
+      <p class="lead">This website allows you to sell and buy textbooks. &#128214;</p>
+    </div>
+</div>
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/testapp/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'testapp:post' %}">Create a Listing<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'testapp:classsubject' %}">Search for Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'testapp:search' %}">Search for Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'testapp:favorites' %}">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'testapp:profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'testapp:threads' %}">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'testapp:add_friend' user.id %}">Add Friends</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="navbar-brand mb-0 h1 fs-3">Hello {{ user.username }}.</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="/logout" role="button">Logout</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="navbar-link" href="/logout">Logout</a>
+                </li> -->
+                <!-- <form class="form-inline">
+                    <input class="form-control" id="anythingSearch" type="text" placeholder="Search" aria-label="Search">
+                </form> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<hr>
+<br/>

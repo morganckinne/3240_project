@@ -1,0 +1,17 @@
+{% include "testapp/header.html" %}
+
+<div class="card">
+    <div class="card-body text-center">
+        <form method="POST" action="{% url 'testapp:add_friend' user.pk %}">
+            {% csrf_token %}
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <fieldset>
+                <label>Friend Username:</label>
+                <input type="text" name="reciever" id="1" value="" class="form-control">
+            </fieldset>
+            <div class="text-center">
+                <input type="submit" value="Add Friend" class="my-4 btn btn-primary text-center">
+            </div>
+        </form>
+    </div>
+</div>

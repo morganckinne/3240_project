@@ -1,0 +1,56 @@
+{% include "testapp/header.html" %}
+
+<!--https://stackoverflow.com/questions/69250686/how-to-centre-a-div-in-bootstrap-5-->
+
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-5">Update your information below:</h1>
+    </div>
+</div>
+</div>
+
+<div class="card">
+    <div class="card-body text-center">
+        <!-- <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update">
+        </form> -->
+        <form method="POST" action="{% url 'testapp:update_profile' user.pk %}">
+            {% csrf_token %}
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <fieldset>
+                <label>Name:</label>
+                <h1></h1>
+                <input type="text" name="name" id="1" value="{{ profile.name }}" class="form-control">
+            </fieldset>
+            <fieldset>
+                <h1></h1>
+                <h1></h1>
+                <label>Year:</label>
+                <select name="year" id="2">
+                    {% for year in profile.years %}
+                    {% if year.0 == profile.year %}
+                    <option value="{{ year.0 }}" selected>{{ year.1 }}</option>
+                    {% else %}
+                    <option value="{{ year.0 }}">{{ year.1 }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </fieldset>
+            <fieldset>
+                <h1></h1>
+                <h1></h1>
+                <label>Major:</label>
+                <h1></h1>
+                <input type="text" name="major" id="3" value="{{ profile.major }}" class="form-control">
+            </fieldset>
+            <div class="text-center">
+                <input type="submit" value="Update" class="my-4 btn btn-primary text-center">
+            </div>
+        </form>
+        <button type="button" class="btn btn-rounded btn-lg">
+            <a class="nav-link" href="{% url 'testapp:profile' %}">Cancel</a>
+        </button>
+    </div>
+</div>

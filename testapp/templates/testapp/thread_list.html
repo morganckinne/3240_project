@@ -1,0 +1,36 @@
+{% include "testapp/header.html" %}
+
+<div class="card">
+    <div class="card-body text-center">
+        <p class="h3">&#128172; Your Messages:</p>
+    </div>
+</div>
+
+<div class="container-fluid d-flex align-items-center justify-content-center">
+    <button type="button" class="btn btn-rounded btn-lg">
+        <a class="nav-link" href="{% url 'testapp:thread_creation' %}">Create New Thread!</a>
+    </button>
+</div>
+    {% if thread_list %}
+    {% for thread in thread_list %}
+    <div class="card">
+        <div class="card-body text-center">
+            {% if thread.user1 != user %}
+            <p>
+                <a class="nav-link" href="{% url 'testapp:thread_view' thread.pk %}">{{thread.subject_text}} - {{thread.user1.username}}</a>
+            </p>
+            {% else %}
+            <p>
+                <a class="nav-link" href="{% url 'testapp:thread_view' thread.pk %}">{{thread.subject_text}} - {{thread.user2.username}}</a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="card">
+        <div class="card-body text-center">
+            <p>No threads are available.</p>
+        </div>
+    </div>
+    {% endif %}

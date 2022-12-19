@@ -1,0 +1,29 @@
+{% include "testapp/header.html" %}
+
+<div class="card">
+    <div class="card-body text-center">
+        <p class="h3 mb-3">Create a Thread:</p>
+        <form method="POST" action="{% url 'testapp:create_thread' %}">
+            {% csrf_token %}
+            {% if error_message %}<p class="alert alert-danger"><strong>{{ error_message }}</strong></p>{% endif %}
+            <fieldset>
+                <div class="mx-auto col-sm-3">
+                    <label>User to Message:<span class="require text-danger"> *</span></label>
+                    <input type="text" name="reciever" id="1" value="" class="form-control">
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="mx-auto col-sm-3">
+                    <label>Subject:</label>
+                    <input type="text" name="subject" id="2" value="" class="form-control">
+                </div>
+            </fieldset>
+            <div class="text-center">
+                <input type="submit" value="Create Thread" class="my-4 btn btn-primary text-center">
+            </div>
+        </form>
+        <button type="button" class="btn btn-rounded btn-lg">
+            <a class="nav-link" href="{% url 'testapp:threads' %}">Cancel</a>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{% include "testapp/header.html" %}
+
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+      <h1 class="display-6">Search for a department here:</h1>
+      <p>Try entering: CS, APMA, or other capitalized department pnuemonics. Entering Computer Science or Mathematics will not work.</p>
+    </div>
+</div>
+
+<!-- want a dropdown menu to select DEPT from, need subject_list instead of just subject -->
+<div class="container text-center">
+    <html>
+        <body>
+            <form method = "POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <!-- <select class="form-select form-select-border-width" aria-label="Default select example" style="width:auto;">
+                    <option selected>Choose a department:</option>
+                    {% for item in subject %}
+                        <option value="1">{{ item.subject }}</option>
+                    {% endfor %}
+                </select> -->
+            <input type = "submit" value = "Submit" class="my-2 btn btn-primary text-center">
+            <!-- <input type = "delete" value = "Delete"> --> 
+            </form>
+        </body>
+    </html>
+</div>

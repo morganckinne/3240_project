@@ -1,0 +1,56 @@
+{% load socialaccount %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load static %}
+
+<html>
+<body>
+
+    <div class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+            <h1 class="display-4">Textbook Exchange App</h1>
+        </div>
+    </div>
+
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'testapp:index' %}">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <hr>
+    <br />
+
+    <div>
+
+    </div>
+
+    <div class="container text-center">
+        <div class="card-body text-center">
+            <p class="h1 mb-4">&#128075; Looking for a cheap textbook?</p>
+            <p class="h5 my-4">With our website you can:</p>
+            <p class="my-2">&#128269; Search for textbooks being sold</p>
+            <p class="my-2">&#128218; Keep a list of your favorite posts</p>
+            <p class="my-2">&#128483; Message other students selling/buying textbooks</p>
+            <p class="h5 mt-4">...And more! Sign up today and we'll connect you to the textbooks you need!</p>
+        </div>
+        {% if user.is_authenticated %}
+        <p><strong> Welcome, You are logged in as {{ user.username }}</strong></p>
+        <a href="/logout">Logout With Google</a>
+        {% else %}
+        <form action="{% provider_login_url 'google' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="my-2 btn btn-primary text-center">Login With Google</button>
+        </form>
+        <!-- <a href="{% provider_login_url 'google' %}">Login With Google</a> -->
+        {% endif %}
+    </div>
+
+</body>
+</html>
