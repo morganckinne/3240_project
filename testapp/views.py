@@ -10,6 +10,7 @@ from .models import ClassSubject, Post, Profile, Thread, Message
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 import re
+#note
 
 class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = 'testapp/index.html'
